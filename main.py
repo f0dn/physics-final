@@ -14,12 +14,14 @@ pendulum_ang = 0
 pendulum_moment = pendulum_mass * pendulum_length**2 / 2
 gravity = vector(0, -9.81, 0)
 
+friction_coefficient = 0.5
+
 t = 0
 dt = 0.001
 
 while True:
     rate(1000)
-    torque = (pendulum_mass * gravity).cross(pendulum.pos)
+    torque = (pendulum_mass * gravity).cross(pendulum.pos) - friction_coefficient * pendulum_ang_velocity * pendulum_length * vector(0, 0, -1)
     ang_accel = -(torque.mag * sign(torque.z)) / pendulum_moment
     pendulum_ang_velocity += ang_accel * dt
     pendulum_ang += pendulum_ang_velocity * dt
