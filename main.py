@@ -1,1 +1,28 @@
-import vpython
+from math import cos, sin
+from vpython import sign, sphere, vector, color, rate, graph, gcurve
+
+ang_velocity_graph = graph(title="Pendulum Angular Velocity", xtitle="Time (s)", ytitle="Velocity (m/s)")
+pendulum_graph = gcurve(color=color.red, graph=ang_velocity_graph)
+
+pendulum_length = 20
+pendulum = sphere(pos=vector(0, -pendulum_length, 0), radius=1, color=color.red)
+pendulum_mass = 5
+pendulum_ang_velocity = 1
+pendulum_ang = 0
+pendulum_moment = pendulum_mass * pendulum_length**2 / 2
+gravity = vector(0, -9.81, 0)
+
+t = 0
+dt = 0.001
+
+while True:
+    rate(1000)
+    torque = (pendulum_mass * gravity).cross(pendulum.pos)
+    ang_accel = -(torque.mag * sign(torque.z)) / pendulum_moment
+    pendulum_ang_velocity += ang_accel * dt
+    pendulum_ang += pendulum_ang_velocity * dt
+    pendulum.pos = vector(pendulum_length * sin(pendulum_ang), -pendulum_length * cos(pendulum_ang), 0)
+
+    pendulum_graph.plot(t, pendulum_ang_velocity)
+
+    t += dt
