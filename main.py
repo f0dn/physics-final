@@ -3,6 +3,8 @@ from vpython import sign, sphere, vector, color, rate, graph, gcurve
 
 ang_velocity_graph = graph(title="Pendulum Angular Velocity", xtitle="Time (s)", ytitle="Velocity (m/s)")
 pendulum_graph = gcurve(color=color.red, graph=ang_velocity_graph)
+phase_space_graph = graph(title="Pendulum Phase Space", xtitle="Angle (rad)", ytitle="Angular Velocity (rad/s)")
+pendulum_phase_space = gcurve(color=color.blue, graph=phase_space_graph)
 
 pendulum_length = 20
 pendulum = sphere(pos=vector(0, -pendulum_length, 0), radius=1, color=color.red)
@@ -24,5 +26,6 @@ while True:
     pendulum.pos = vector(pendulum_length * sin(pendulum_ang), -pendulum_length * cos(pendulum_ang), 0)
 
     pendulum_graph.plot(t, pendulum_ang_velocity)
+    pendulum_phase_space.plot(pendulum_ang, pendulum_ang_velocity)
 
     t += dt
