@@ -19,16 +19,16 @@ pendulum_phase_space = gcurve(color=color.blue, graph=phase_space_graph)
 
 pendulum_length = 20
 pendulum = sphere(pos=vector(0, -pendulum_length, 0), radius=1, color=color.red)
-pendulum_mass = 20
-pendulum_ang_velocity = 1
-pendulum_ang = -0.2
+pendulum_mass = 15
+pendulum_ang_velocity = 0
+pendulum_ang = 0.2
 pendulum_moment = pendulum_mass * pendulum_length**2 / 2
 gravity = vector(0, -9.81, 0)
 
 friction_coefficient = 0.3
 
-external_force_amplitude = 85
-external_force_frequency = 1
+external_force_amplitude = 393
+external_force_frequency = 0.51111
 
 push_angle = 0.15
 effective_angle_diff = 0.1
