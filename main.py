@@ -57,10 +57,12 @@ class Swing:
         self.pendulum_phase_space.plot(self.pendulum_ang, self.pendulum_ang_velocity)
 
 swing1 = Swing(color.red, color.blue, 20, 15, 0, 0.2, 0.3, 393, 0.51111, 0.15, 0.1)
-swing2 = Swing(color.green, color.orange, 15, 15, 0, 0.2, 0.3, 393, 0.51111, 0.15, 0.1)
+swing2 = Swing(color.green, color.orange, 10, 11, 0.1111, 0.11111, 0.11111, 111, 0.11111, 0.11111, 0.1111)
+swing3 = Swing(color.yellow, color.black, 17, 17, 0.17, 0.17, 0.17, 170, 0.17, 0.17, 0.17)
     
 while True:
     rate(1000)
-    swing1.update()
+    #swing1.update()
     swing2.update()
+    swing3.update()
     t += dt
