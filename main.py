@@ -1,6 +1,5 @@
-from math import cos, sin
-from vpython import sign, sphere, vector, color, rate, graph, gcurve
-    
+from vpython import *
+
 t = 0
 dt = 0.1
 
@@ -12,7 +11,7 @@ class Swing:
             ytitle="Velocity (m/s)",
             scroll=True,
             xmin=0,
-            xmax=1000,
+            xmax=100,
         )
         self.pendulum_graph = gcurve(color=v_color, graph=self.ang_velocity_graph)
         self.phase_space_graph = graph(
@@ -61,7 +60,7 @@ swing2 = Swing(color.green, color.orange, 10, 11, 0.1111, 0.11111, 0.11111, 111,
 swing3 = Swing(color.yellow, color.black, 17, 17, 0.17, 0.17, 0.17, 170, 0.17, 0.17, 0.17)
     
 while True:
-    rate(1000)
+    rate(60)
     #swing1.update()
     swing2.update()
     swing3.update()
