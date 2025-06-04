@@ -3,6 +3,12 @@ from vpython import *
 t = 0
 dt = 0.1
 
+images = {
+    'BABY_DANIEL': ['https://i.ibb.co/pjkg62st/baby-daniel.jpg', 134, 170, 0.1],
+    'BABY_FLINT': ['https://i.ibb.co/b43jm6f/baby-flint.jpg', 0.1],
+    'MOM_DANIEL': ['https://i.ibb.co/psXhSLX/mom-daniel.jpg', 0.1],
+    'MOM_FLINT': ['https://i.ibb.co/V0cyPxV6/mom-flint.jpg', 0.1]
+}
 
 class Swing:
     def __init__(
@@ -18,6 +24,8 @@ class Swing:
         external_force_frequency,
         push_angle,
         effective_angle_diff,
+        texture_mom,
+        texture_baby
     ):
         self.ang_velocity_graph = graph(
             title="Pendulum Angular Velocity",
@@ -36,8 +44,10 @@ class Swing:
         self.pendulum_phase_space = gcurve(color=ps_color, graph=self.phase_space_graph)
 
         self.pendulum_length = length
+        self.baby_image = images[texture_baby]
+        self.mom_image = images[texture_mom]
         self.pendulum = sphere(
-            pos=vector(0, -self.pendulum_length, 0), radius=1, color=color.red
+            pos=vector(0, -self.pendulum_length, 0), radius=10, texture=self.baby_image[0]
         )
         self.pendulum_mass = mass
         self.pendulum_ang_velocity = ang_velo
@@ -79,8 +89,22 @@ class Swing:
         self.pendulum_graph.plot(t, self.pendulum_ang_velocity)
         self.pendulum_phase_space.plot(self.pendulum_ang, self.pendulum_ang_velocity)
 
+swing1 = Swing(
+    color.red, 
+    color.blue, 
+    20,
+    15,
+    0, 
+    0.2, 
+    0.3, 
+    393, 
+    0.51111, 
+    0.15, 
+    0.1, 
+    'MOM_FLINT', 
+    'BABY_DANIEL'
+)
 
-swing1 = Swing(color.red, color.blue, 20, 15, 0, 0.2, 0.3, 393, 0.51111, 0.15, 0.1)
 swing2 = Swing(
     color.green,
     color.orange,
@@ -93,14 +117,32 @@ swing2 = Swing(
     0.11111,
     0.11111,
     0.1111,
+    'MOM_DANIEL', 
+    'BABY_FLINT'
 )
-swing3 = Swing(
-    color.yellow, color.black, 17, 17, 0.17, 0.17, 0.17, 170, 0.17, 0.17, 0.17
-)
+
+scene.visible = False
+scene.waitfor('textures')
+scene.visible = True
+
+# bd = box(
+#     texture=BABY_DANIEL,
+#     length=134 * SCALES[0],
+#     height=170 * SCALES[0],
+# )
+# bf = box(
+#     texture=BABY_DANIEL
+# )
+# md = box(
+#     texture=BABY_DANIEL
+# )
+# mf = box(
+#     texture=BABY_DANIEL
+# )
+
 
 while True:
     rate(60)
-    # swing1.update()
+    swing1.update()
     swing2.update()
-    swing3.update()
     t += dt
