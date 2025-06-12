@@ -10,6 +10,7 @@ images = {
     "MOM_FLINT": ["https://i.ibb.co/V0cyPxV6/mom-flint.jpg", 0.1],
 }
 
+length = 0
 
 class Swing:
     def __init__(
@@ -93,6 +94,11 @@ class Swing:
         self.pendulum_phase_space.plot(self.pendulum_ang, self.pendulum_ang_velocity)
 
 
+def set_length(evt):
+    length = evt.value
+
+length_slider = slider(bind=set_length, min=0, max=50)
+
 swing1 = Swing(
     color.red,
     color.blue,
@@ -128,6 +134,7 @@ swing2 = Swing(
 scene.visible = False
 scene.waitfor("textures")
 scene.visible = True
+
 
 while True:
     rate(60)
